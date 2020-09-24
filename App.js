@@ -1,22 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useRef } from 'react';
-import { StyleSheet, View, Button, BackHandler } from 'react-native';
+import { StyleSheet, View, Text, BackHandler, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { WebView } from 'react-native-webview';
+import { block } from 'react-native-reanimated';
 
 
 const Stack = createStackNavigator();
 
 
-
 // Criei aqui 2 componentes screens
-function Home({ navigation }){
-  
+function Home({ navigation }) {
+
   return (
-    <View>
+    <View style={styles.container}>
       
-      <Button title="Info" onPress={ () => { navigation.navigate('Info') } } />
+      <TouchableOpacity style={styles.button} onPress={ () => { navigation.navigate('Info') } }>
+        <Text style={{ color: "#111", textAlign: "center", fontWeight: "bold" }}> WebView </Text>
+      </TouchableOpacity>
 
     </View>
   );
@@ -26,7 +28,7 @@ function Home({ navigation }){
 function Info() {
 
   return (
-    <View style={ styles.container }>
+    <View style={styles.containerW}>
 
       <WebviewUi /> 
 
@@ -42,8 +44,7 @@ function WebviewUi(){
   const navigation = useNavigation();
 
 
-  function webViewGoBack(props) 
-  {
+  function webViewGoBack(props) {
 
       if( props.canGoBack )
       {
@@ -110,5 +111,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f9f9f9',
+    padding: 10
+  },
+
+  containerW: {
+    flex: 1
+  },
+
+  button: {
+    backgroundColor: "#888",
+    width: "100%",
+    padding: 20,
   },
 });
